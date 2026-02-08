@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Create audio element
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Placeholder music
+    const audio = new Audio('/The Chainsmokers - Closer (Lyrics) ft. Halsey - 7clouds.mp3');
     audio.loop = true;
     audioRef.current = audio;
 
@@ -199,7 +199,7 @@ const App: React.FC = () => {
               </div>
               <div>
                 <p className="text-[10px] text-pink-400 font-bold uppercase tracking-wider">Now Playing</p>
-                <p className="text-sm font-semibold truncate">Perfect - Ed Sheeran</p>
+                <p className="text-sm font-semibold truncate">Closer - The Chainsmokers</p>
                 <p className="text-[9px] text-white/40">{isPlaying ? 'Playing...' : 'Paused'}</p>
               </div>
             </motion.div>
