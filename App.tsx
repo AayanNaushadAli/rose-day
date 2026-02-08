@@ -31,19 +31,34 @@ const App: React.FC = () => {
     audio.loop = true;
     audioRef.current = audio;
 
-    // Attempt to play on mount (usually blocked)
-    const playAudio = () => {
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch(err => {
-        console.log("Autoplay blocked:", err);
-      });
+    const startAudio = () => {
+      if (audioRef.current && !isPlaying) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+          removeInteractionListeners();
+        }).catch(err => {
+          console.log("Play failed:", err);
+        });
+      }
     };
 
-    playAudio();
+    const removeInteractionListeners = () => {
+      window.removeEventListener('click', startAudio);
+      window.removeEventListener('touchstart', startAudio);
+      window.removeEventListener('keydown', startAudio);
+    };
+
+    // Attempt to play immediately (might work if already interacted)
+    startAudio();
+
+    // Add listeners for first interaction
+    window.addEventListener('click', startAudio);
+    window.addEventListener('touchstart', startAudio);
+    window.addEventListener('keydown', startAudio);
 
     return () => {
       audio.pause();
+      removeInteractionListeners();
       audioRef.current = null;
     };
   }, []);
