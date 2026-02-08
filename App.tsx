@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     // Create audio element
-    const audio = new Audio('/The Chainsmokers - Closer (Lyrics) ft. Halsey - 7clouds.mp3');
+    const audio = new Audio('/closer.mp3');
     audio.loop = true;
     audioRef.current = audio;
 
